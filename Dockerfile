@@ -1,6 +1,6 @@
-FROM php:7.1.8-fpm
+FROM php:7.2-fpm
 
-MAINTAINER Rex Zeng, rex@rexskz.info
+LABEL maintainer='Rex Zeng, rex@rexskz.info'
 
 ENV MYNUAA_ROOT_PATH /www
 
