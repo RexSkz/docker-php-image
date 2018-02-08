@@ -9,7 +9,7 @@ RUN echo 'deb http://mirrors.ustc.edu.cn/debian/ jessie main' > /etc/apt/sources
 RUN echo 'deb http://mirrors.ustc.edu.cn/debian/ jessie-updates main' >> /etc/apt/sources.list
 
 # install some extensions
-RUN apt-get update && apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng12-dev libicu-dev libmemcached-dev
+RUN apt-get update && apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng12-dev libicu-dev libmemcached-dev zlib1g-dev libsasl2-dev
 RUN docker-php-ext-install mysqli pdo_mysql iconv mbstring intl
 
 # for gd
