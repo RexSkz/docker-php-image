@@ -5,12 +5,12 @@ LABEL maintainer='Rex Zeng, rex@rexskz.info'
 ENV MYNUAA_ROOT_PATH /www
 
 # add sourcelist
-RUN echo '' > /etc/apt/sources.list
-RUN echo 'deb https://mirrors.tuna.tsinghua.edu.cn/debian/ stretch main' >> /etc/apt/sources.list
-RUN echo 'deb https://mirrors.tuna.tsinghua.edu.cn/debian/ stretch-updates main' >> /etc/apt/sources.list
+RUN echo 'deb http://mirrors.ustc.edu.cn/debian/ stretch main' > /etc/apt/sources.list
+RUN echo 'deb http://mirrors.ustc.edu.cn/debian/ stretch-updates main' >> /etc/apt/sources.list
 
 # install some extensions
-RUN apt-get update && apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng12-dev libicu-dev libmemcached-dev zlib1g-dev libsasl2-dev
+RUN apt-get update && apt-get upgrade
+RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng-dev libicu-dev libmemcached-dev zlib1g-dev libsasl2-dev
 RUN docker-php-ext-install mysqli pdo_mysql iconv mbstring intl
 
 # for gd
