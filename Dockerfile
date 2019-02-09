@@ -1,12 +1,10 @@
-FROM php:fpm
+FROM php:7.3.2-fpm
 
 LABEL maintainer='Rex Zeng, rex@rexskz.info'
 
-ENV MYNUAA_ROOT_PATH /www
-
 # add sourcelist
-#RUN echo 'deb https://mirrors.tuna.tsinghua.edu.cn/debian/ stretch main' > /etc/apt/sources.list
-#RUN echo 'deb https://mirrors.tuna.tsinghua.edu.cn/debian/ stretch-updates main' >> /etc/apt/sources.list
+# RUN echo 'deb https://mirrors.tuna.tsinghua.edu.cn/debian/ stretch main' > /etc/apt/sources.list
+# RUN echo 'deb https://mirrors.tuna.tsinghua.edu.cn/debian/ stretch-updates main' >> /etc/apt/sources.list
 
 # install some extensions
 RUN apt-get update
@@ -22,6 +20,6 @@ RUN yes '' | pecl install igbinary memcached
 RUN docker-php-ext-enable igbinary.so memcached.so
 
 # clear cache
-RUN apt-get clean && pecl clear-cache
+RUN apt-get autoclean && apt-get clean && pecl clear-cache
 
 EXPOSE 9000
