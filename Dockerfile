@@ -1,4 +1,4 @@
-FROM php:7.3.7-fpm-stretch
+FROM php:7.4.9-fpm-buster
 
 LABEL maintainer='Rex Zeng, rex@rexskz.info'
 
@@ -13,14 +13,19 @@ RUN apt-get update && \
     docker-php-ext-install mysqli pdo_mysql bz2 zip
 
 # for gd
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install gd
 
 # for memcached
 RUN yes '' | pecl install igbinary memcached
 RUN docker-php-ext-enable igbinary.so memcached.so
 
+# for imagick
+RUN apt-get install -y libmagickwand-dev libmagickcore-dev && \
+    pecl install imagick && \
+    docker-php-ext-enable imagick
+
 # clear cache
-RUN apt-get autoclean && apt-get clean && pecl clear-cache
+RUN apt-get autoclean && apt-get clean && pecl clear-cache && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 9000
