@@ -1,4 +1,4 @@
-FROM php:8.1.4-fpm-buster
+FROM php:8.2.0alpha1-fpm-buster
 
 LABEL maintainer='Rex Zeng, rex@rexskz.info'
 
