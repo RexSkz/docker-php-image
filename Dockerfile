@@ -1,4 +1,4 @@
-FROM php:8.2.0RC4-fpm-buster
+FROM php:8.2.0RC2-cli-bullseye
 
 LABEL maintainer='Rex Zeng, rex@rexskz.info'
 
