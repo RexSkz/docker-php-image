@@ -1,4 +1,4 @@
-FROM php:8.2.0RC2-cli-bullseye
+FROM php:cli
 
 LABEL maintainer='Rex Zeng, rex@rexskz.info'
 
