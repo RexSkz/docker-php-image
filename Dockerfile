@@ -1,4 +1,4 @@
-FROM php:8.2.2-fpm-bullseye
+FROM php:8.2.3-fpm-bullseye
 
 LABEL maintainer='Rex Zeng, rex@rexskz.info'
 
