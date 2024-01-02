@@ -1,4 +1,4 @@
-FROM php:8.2.4-fpm-bullseye
+FROM php:8.2-fpm-bullseye
 
 LABEL maintainer='Rex Zeng, rex@rexskz.info'
 
@@ -22,8 +22,8 @@ RUN docker-php-ext-enable igbinary.so memcached.so
 
 # for imagick
 RUN apt-get install -y libmagickwand-dev libmagickcore-dev && \
-    pecl install imagick && \
-    docker-php-ext-enable imagick
+    pecl install imagick channel://pecl.php.net/runkit7-4.0.0a6 && \
+    docker-php-ext-enable imagick runkit7
 
 # clear cache
 RUN apt-get autoclean && apt-get clean && pecl clear-cache && rm -rf /var/lib/apt/lists/*
