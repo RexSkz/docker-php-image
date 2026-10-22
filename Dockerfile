@@ -1,4 +1,4 @@
-FROM php:8.3-rc-fpm-alpine3.20
+FROM php:8.6-rc-fpm-alpine3.24
 
 LABEL maintainer='Rex Zeng, rex@rexskz.info'
 
