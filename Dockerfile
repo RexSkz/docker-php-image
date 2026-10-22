@@ -38,7 +38,7 @@ RUN --mount=type=bind,from=ghcr.io/php/pie:bin,source=/pie,target=/usr/local/bin
     }; \
     pie_install_extension igbinary/igbinary:dev-master && \
     pie_install_extension imagick/imagick:dev-master && \
-    pie_install_extension --enable-memcached-igbinary php-memcached/php-memcached:3.4.0 && \
+    pie_install_extension --enable-memcached-igbinary php-memcached/php-memcached:dev-issue-8.6.0beta1 && \
     pie_install_extension krakjoe/uopz:@dev && \
     apk del .build-deps && \
     rm -rf /var/cache/apk/*
