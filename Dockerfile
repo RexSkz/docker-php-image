@@ -29,10 +29,17 @@ RUN apk add --no-cache \
 # PHP 8.6 images no longer include PECL. Use the official PHP extension installer.
 # runkit7 only supports PHP through 8.1; uopz provides overlapping runtime hooks on PHP 8+.
 RUN --mount=type=bind,from=ghcr.io/php/pie:bin,source=/pie,target=/usr/local/bin/pie \
-    pie install --no-cache igbinary/igbinary:dev-master && \
-    pie install --no-cache imagick/imagick:3.8.1 && \
-    pie install --no-cache --enable-memcached-igbinary php-memcached/php-memcached:3.4.0 && \
-    pie install --no-cache krakjoe/uopz:@dev && \
+    pie_install_extension() { \
+        if pie install --no-cache "$@"; then return 0; fi; \
+        for build_log in /tmp/pie_make_output_*; do \
+            if [ -f "$build_log" ]; then tail -n 100 "$build_log"; fi; \
+        done; \
+        return 1; \
+    }; \
+    pie_install_extension igbinary/igbinary:dev-master && \
+    pie_install_extension imagick/imagick:dev-master && \
+    pie_install_extension --enable-memcached-igbinary php-memcached/php-memcached:3.4.0 && \
+    pie_install_extension krakjoe/uopz:@dev && \
     apk del .build-deps && \
     rm -rf /var/cache/apk/*
 
