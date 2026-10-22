@@ -27,7 +27,8 @@ RUN apk add --no-cache \
     docker-php-ext-install bz2 gd mysqli pdo_mysql zip
 
 # PHP 8.6 images no longer include PECL. Use the official PHP extension installer.
-# runkit7 only supports PHP through 8.1; uopz provides overlapping runtime hooks on PHP 8+.
+# runkit7 only supports PHP through 8.1, and current uopz sources use APIs removed in PHP 8.6.
+# Neither runtime-rewriting extension can currently be built for this PHP version.
 RUN --mount=type=bind,from=ghcr.io/php/pie:bin,source=/pie,target=/usr/local/bin/pie \
     pie_install_extension() { \
         if pie install --no-cache "$@"; then return 0; fi; \
@@ -39,7 +40,6 @@ RUN --mount=type=bind,from=ghcr.io/php/pie:bin,source=/pie,target=/usr/local/bin
     pie_install_extension igbinary/igbinary:dev-master && \
     pie_install_extension imagick/imagick:dev-master && \
     pie_install_extension --enable-memcached-igbinary php-memcached/php-memcached:dev-issue-8.6.0beta1 && \
-    pie_install_extension krakjoe/uopz:@dev && \
     apk del .build-deps && \
     rm -rf /var/cache/apk/*
 
